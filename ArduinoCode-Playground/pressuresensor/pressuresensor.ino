@@ -40,8 +40,8 @@ void loop()
   //   //delay(PSensor_DELAY); // prevents inter PSensor interferance
   // }
 
-  readAllSensors(PSensorsRAW);
-  readAllSensorLPF(PSensorsRAW, PSensors);
+  readAllPSensors(PSensorsRAW);
+  readAllPSensorsLPF(PSensorsRAW, PSensors);
 
   // pause for timer expiration
   while(loopTimer < 10);
@@ -65,7 +65,7 @@ void setupPSensor(int PSensor)
   return;
 }
 
-void readAllSensors(int *PArray)
+void readAllPSensors(int *PArray)
 {
   for(int i = 0; i < NUM_PSENSORS; i++)
   {
@@ -78,7 +78,7 @@ void setupPSensorLPF()
 {
   for(int i = 0; i < NUM_PSENSORS; i++)
   {
-    PSensorLPFStates[i] = 0;
+    PSensorLPFStates[i] = readPSensor(i);
   }
 }
 
@@ -89,7 +89,7 @@ float readPSensorLPF(int PSensor, int updateVal)
   return PSensorLPFStates[PSensor];
 }
 
-void readAllSensorLPF(int *PArrayData, float *LPFDataOutput)
+void readAllPSensorsLPF(int *PArrayData, float *LPFDataOutput)
 {
   for(int i = 0; i < NUM_PSENSORS; i++)
   {
