@@ -1,12 +1,6 @@
 #include "pingsensor.h"
 #include <elapsedMillis.h>
 
-#define USENSOR_TRIG_OFFSET 1
-#define USENSOR_PULS_OFFSET 0
-#define NUM_USENSORS 5
-#define USENSOR_TIMEOUT 6000  // in micro - determines range
-#define USENSOR_DELAY 10// in millis - prevents inter sensor interfence
-
 // elapsedMillis loopTimer;
 // long Usensors[3];
 
@@ -67,7 +61,7 @@ void readAllUSensors(int *UArray)
 {
   for(int s = 0; s < NUM_USENSORS; s++)
   {
-    *UArray = readUSensor(i);
+    *UArray = readUSensor(s, USENSOR_TIMEOUT);
     UArray++;
   }
 }
