@@ -13,4 +13,6 @@ float readPSensorLPF(int PSensor, int updateVal);
 
 void readAllPSensorsLPF(int *PArrayData, float *LPFDataOutput);
 
+void setupAllPSensors();
+
 #endif

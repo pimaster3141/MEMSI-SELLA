@@ -100,3 +100,10 @@ void readAllPSensorsLPF(int *PArrayData, float *LPFDataOutput)
   }
 }
 
+void setupAllPSensors()
+{
+  for(int s = 0; s < NUM_PSENSORS; s++)
+  {
+    setupPSensor(s);
+  }
+}
