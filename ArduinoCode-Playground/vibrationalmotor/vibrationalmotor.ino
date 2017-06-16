@@ -1,3 +1,20 @@
+/*
+THIS FILE HAS BEEN FINALIZED. DO NOT EDIT. FIND THE vibrationalmotor.h AND
+vibrationalmotor.c FILES
+
+
+
+8888888888888888888888888888888888888888888888888
+*/
+
+
+
+
+
+
+
+
+
 //#define FREQ 10000 //1-10 khz frequency for PWM
 #define PERIOD 1000 // usec
 // #define BUZZTIME 10000//total time that the thing is cycling/vibrating in ms ( = 10 seconds here) 
@@ -20,20 +37,20 @@
 ////need to get delayTime, badPosture bool, and offMode 
 
 
-void setup()
-{
-pinMode(MOTORPIN,OUTPUT);
+// void setup()
+// {
+// pinMode(MOTORPIN,OUTPUT);
 
 
-//get any bluetooth info on posture here 
-}
+// //get any bluetooth info on posture here 
+// }
 
 
-//start helper functions
+// //start helper functions
 
-void overallLoop(){
+// void overallLoop(){
   
-}
+// }
 
 // void runMotorBasic(int timeDelay){
 //   digitalWrite(MOTORPIN, HIGH);
