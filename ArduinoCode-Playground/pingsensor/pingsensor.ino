@@ -10,14 +10,14 @@ pingsensor.c FILES
 
 #include <elapsedMillis.h>
 
-#define USENSOR_TRIG_OFFSET 1
-#define USENSOR_PULS_OFFSET 0
-#define NUM_USENSORS 5
-#define USENSOR_TIMEOUT 6000  // in micro - determines range
-#define USENSOR_DELAY 10// in millis - prevents inter sensor interfence
+#define USENSOR_TRIG_OFFSET 0
+#define USENSOR_PULS_OFFSET 1
+#define NUM_USENSORS 2
+#define USENSOR_TIMEOUT 10000  // in micro - determines range
+#define USENSOR_DELAY 20// in millis - prevents inter sensor interfence
 
 elapsedMillis loopTimer;
-long Usensors[3];
+long Usensors[NUM_USENSORS];
 
 //init
 void setup() 
@@ -26,7 +26,7 @@ void setup()
   Serial.begin(9600); 
 
   // setup Usensors
-  for(int s = 0; s < 3; s++)
+  for(int s = 0; s < NUM_USENSORS; s++)
   {
     setupUSensor(s+1);
   }
@@ -41,7 +41,7 @@ void loop()
   loopTimer = 0;
 
   // for each Usensor
-  for(int s = 0; s < 3; s++)
+  for(int s = 1; s < NUM_USENSORS; s++)
   {
     // read Usensor
     Usensors[s] = readUSensor(s+1, USENSOR_TIMEOUT);
@@ -51,7 +51,13 @@ void loop()
   // pause for timer expiration
   while(loopTimer < 50);
 
-    Serial.println(String(Usensors[0])+","+String(Usensors[1])+","+String(Usensors[2]));
+
+  for(int s = 1; s < NUM_USENSORS; s++)
+  {
+    Serial.print(String(Usensors[s]) + ",");
+  }
+  Serial.println();
+    // Serial.println(String(Usensors[0])+","+String(Usensors[1])+","+String(Usensors[2]));
 
 }
 
@@ -60,7 +66,7 @@ void loop()
 long readUSensor(int Usensor, int timeout)
 {
   digitalWrite(Usensor*2 + USENSOR_TRIG_OFFSET, HIGH);
-  delayMicroseconds(10);
+  delayMicroseconds(12);
   digitalWrite(Usensor*2 + USENSOR_TRIG_OFFSET, LOW);
   return pulseIn(Usensor*2 + USENSOR_PULS_OFFSET, HIGH, timeout);
 }
@@ -76,7 +82,7 @@ void readAllUSensors(int *UArray)
 {
   for(int s = 0; s < NUM_USENSORS; s++)
   {
-    *UArray = readUSensor(i);
+    *UArray = readUSensor(s, USENSOR_TIMEOUT);
     UArray++;
   }
 }

@@ -37,13 +37,13 @@ vibrationalmotor.c FILES
 ////need to get delayTime, badPosture bool, and offMode 
 
 
-// void setup()
-// {
-// pinMode(MOTORPIN,OUTPUT);
+void setup()
+{
+pinMode(MOTORPIN,OUTPUT);
 
 
-// //get any bluetooth info on posture here 
-// }
+//get any bluetooth info on posture here 
+}
 
 
 // //start helper functions

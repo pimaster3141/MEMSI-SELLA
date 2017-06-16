@@ -44,8 +44,7 @@
 //   digitalWrite(MOTORPIN, LOW);
 //   delayMicroseconds(timeDelay);
 // }
-
-
+bool isOn = false;
 //troubleshoot this later
 void runMotorPWM(int dutyCycle, int onTime){ //runs motor for msec onTime 
   long cycles = long(onTime) * 1000 / PERIOD;
@@ -71,12 +70,17 @@ void runMotorPWM(int dutyCycle, int onTime){ //runs motor for msec onTime
 
 void motorOn()
 {
+  if(!isOn)
+    for(int i = 50; i < 100; i++)
+      runMotorPWM(i, 16);
+  isOn = true;
   digitalWrite(MOTORPIN, HIGH);
 }
 
 void motorOff()
 {
   digitalWrite(MOTORPIN, LOW);
+  isOn = false;
 }
 
 void setupMotor()
