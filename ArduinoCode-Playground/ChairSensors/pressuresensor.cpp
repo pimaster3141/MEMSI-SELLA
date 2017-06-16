@@ -1,9 +1,6 @@
 #include "pressuresensor.h"
 #include <elapsedMillis.h>
 
-#define NUM_PSENSORS 4
-#define LPF_ALPHA 0.1
-
 elapsedMillis loopTimer;
 float PSensorLPFStates[NUM_PSENSORS];
 

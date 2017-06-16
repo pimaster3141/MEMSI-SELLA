@@ -1,6 +1,9 @@
 #ifndef _PRESSURESENSOR
 #define _PRESSURESENSOR
 
+#define NUM_PSENSORS 4
+#define LPF_ALPHA 0.1
+
 int readPSensor(int PSensor);
 
 void setupPSensor(int PSensor);
