@@ -2,7 +2,9 @@
 #define _PRESSURESENSOR
 
 #define NUM_PSENSORS 4
-#define LPF_ALPHA 0.1
+#define LPF_ALPHA 0.2
+
+// elapsedMillis loopTimer;
 
 int readPSensor(int PSensor);
 

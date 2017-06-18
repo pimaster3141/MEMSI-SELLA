@@ -1,6 +1,7 @@
 #include "pressuresensor.h"
 #include <elapsedMillis.h>
 
+
 elapsedMillis loopTimer;
 float PSensorLPFStates[NUM_PSENSORS];
 
@@ -80,9 +81,9 @@ void setupPSensorLPF()
   }
 }
 
-float readPSensorLPF(int PSensor, int updateVal)
+float readPSensorLPF(int PSensor, int inputVal)
 {
-  updateVal = float(updateVal);
+  float updateVal = float(inputVal);
   PSensorLPFStates[PSensor] = updateVal*LPF_ALPHA + PSensorLPFStates[PSensor]*(1-LPF_ALPHA);
   return PSensorLPFStates[PSensor];
 }
@@ -95,6 +96,11 @@ void readAllPSensorsLPF(int *PArrayData, float *LPFDataOutput)
     LPFDataOutput++;
     PArrayData++;
   }
+  // LPFDataOutput--;
+  // PArrayData--;
+  // Serial.println(*PArrayData);
+  // Serial.println(*LPFDataOutput);
+  // Serial.println();
 }
 
 void setupAllPSensors()

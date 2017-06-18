@@ -4,10 +4,10 @@
 #include <elapsedMillis.h>
 
 #define SENSOR_REFRESH_PERIOD 50 // msec
-#define NUM_SAMPLES 20
-#define PSENSOR_ERROR_THRESHOLD 180
+#define NUM_SAMPLES 10
+#define PSENSOR_ERROR_THRESHOLD 300
 #define USENSOR_ERROR_THRESHOLD 1000
-#define BAD_COUNTER_THRESHOLD 12  
+#define BAD_COUNTER_THRESHOLD 14  
 
 #define BUTTON_PORT 12
 
@@ -75,7 +75,7 @@ void calibratePosture()
 
 bool goodPosture()
 {
-  setupPSensorLPF();
+  // setupPSensorLPF();
   int PSensorsRAW[NUM_PSENSORS];
   float PSensors[NUM_PSENSORS];
   int USensors[NUM_USENSORS];
@@ -89,6 +89,7 @@ bool goodPosture()
 
   for(int i = 0; i < NUM_PSENSORS; i++)
   {
+    Serial.print(String(PSensors[i]) + ", ");
     long temp = PSensors[i] - PSensorCalibration[i];
     if(temp < 0)
       temp = -temp;
@@ -103,7 +104,7 @@ bool goodPosture()
     USensorError = USensorError + temp;
   }
 
-  // Serial.println(PSensorError);
+  Serial.println(String(PSensorError) + "#");
 
   if(PSensorError > PSENSOR_ERROR_THRESHOLD || USensorError > USENSOR_ERROR_THRESHOLD)
     return false;
@@ -127,6 +128,8 @@ void setup()
 
   while(digitalRead(BUTTON_PORT) == 0);
 
+  calibratePosture();
+  calibratePosture();
   calibratePosture();
 }
 
@@ -158,7 +161,7 @@ void loop()
       {
 
         // Serial.println("BAD");
-        Serial.write(0);
+        Serial.write(2);
         motorOn();
       }
 
